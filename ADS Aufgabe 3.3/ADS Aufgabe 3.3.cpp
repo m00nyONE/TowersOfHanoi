@@ -5,48 +5,92 @@
 #include <iostream>
 #include "TowerMap.h"
 
-void Ziehe(int von, int nach, int ScheibenZahl, TowerMap tower);
+bool showsteps = true;
+
+std::vector<std::vector<int>> _tower(3);
+
+void printTowers();
+void setzeTurm(int hight, int from=1, int to=3, int with=2);
 
 int main()
 {
 
-	
 
 	int Scheiben;
-
+	
 
 	std::cout << "Wie viele Scheiben soll der Turm haben? " << std::endl;
 	std::cin >> Scheiben;
 
-	TowerMap tower(Scheiben);
-	TowerMap*ptr = &tower;
+	for (int i = 0; i<Scheiben; i++)
+	{
+		_tower[0].push_back(Scheiben - i);
+	}
 
-	Ziehe(1, 3, Scheiben, tower); // from 1 to 3, n Scheiben
+	printTowers();
+	std::cout << "##############################################" << std::endl;
+
+	setzeTurm(_tower[0].size());
+
+	std::cout << "##############################################" << std::endl;
+	printTowers();
+
 
 	system("pause");
 	return 0;
 }
 
 
-void Ziehe(int from, int to, int ScheibenZahl, TowerMap tower)
+
+void printTowers()
 {
+	system("cls");
 
-	static int GlobaleAnzahl = 1;
+	int tmp = 0;
 
-	if (ScheibenZahl == 0) return;
-	int frei = 6 - from - to;    // bestimme den freien Platz - einfache Methode ( siehe Wikipedia )
-	Ziehe(from, frei, ScheibenZahl - 1, tower);
+	for (int i = 0; i < _tower.size(); i++)
+	{
+		if (_tower[i].size() > tmp)
+		{
+			tmp = _tower[i].size();
+		}
+	}
 
-	std::cout << "Zug " << GlobaleAnzahl << ": " << from << " - " << to << std::endl;
-	tower.move(from -1, to -1);
-	tower.print();
-
-	GlobaleAnzahl++;
-	Ziehe(frei, to, ScheibenZahl - 1, tower);
-
+	for (int i = tmp; i >= 0; i--)
+	{
+		for (int j = 0; j < _tower.size(); j++)
+		{
+			if ( i < _tower[j].size())
+				std::cout << "[" << _tower[j][i] << "]\t";
+			else
+				std::cout << "\t";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << "tow1\ttow2\ttow3" << std::endl;
 
 }
 
-/*
-Anzahl der Züge = max Zahl in Bit -2
-*/
+void setzeTurm(int hight,int from,int to,int with)
+{
+	static int Steps;
+	if ( hight > 0)
+	{
+		setzeTurm((hight - 1), from, with, to);
+		_tower[to - 1].push_back(_tower[from - 1].back()
+		);
+		_tower[from - 1].pop_back();
+		
+		Steps++;
+		std::cout << "Step: " << Steps << " \n\n";
+		
+		if (showsteps)
+		{
+			printTowers();
+			system("pause");
+		}
+		setzeTurm(hight - 1, with, to, from);
+
+
+	}		
+}

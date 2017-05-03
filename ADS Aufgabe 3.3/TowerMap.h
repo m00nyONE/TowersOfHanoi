@@ -3,6 +3,8 @@
 #include <iostream>
 #include <sstream>
 
+
+/*
 class TowerMap
 {
 	int** MapCoords;
@@ -21,5 +23,5 @@ public:
 
 
 };
-
+*/
 
