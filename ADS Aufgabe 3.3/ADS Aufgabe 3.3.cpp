@@ -1,11 +1,12 @@
-// ADS Aufgabe 3.3.cpp : Definiert den Einstiegspunkt für die Konsolenanwendung.
+// FERTIG - Severin Meier
 //
 
 #include "stdafx.h"
 #include <iostream>
 #include "TowerMap.h"
 
-bool showsteps = true;
+bool showsteps = true; //CHANGE THIS TO SPEED UP THE PROCESS OR TO SHOW EVERY STEP!
+int Steps;
 
 std::vector<std::vector<int>> _tower(3);
 
@@ -19,7 +20,7 @@ int main()
 	int Scheiben;
 	
 
-	std::cout << "Wie viele Scheiben soll der Turm haben? " << std::endl;
+	std::cout << "How many disks should the tower have? " << std::endl;
 	std::cin >> Scheiben;
 
 	for (int i = 0; i<Scheiben; i++)
@@ -34,6 +35,7 @@ int main()
 
 	std::cout << "##############################################" << std::endl;
 	printTowers();
+	std::cout << "Schritte: " << Steps << std::endl;
 
 
 	system("pause");
@@ -73,7 +75,7 @@ void printTowers()
 
 void setzeTurm(int hight,int from,int to,int with)
 {
-	static int Steps;
+	
 	if ( hight > 0)
 	{
 		setzeTurm((hight - 1), from, with, to);
