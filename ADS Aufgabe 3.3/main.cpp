@@ -1,5 +1,4 @@
-//
-//
+// TowersOfHanoi by m00ny
 
 #include <iostream>
 #include <stdio.h>
@@ -33,7 +32,7 @@ int main()
 
         std::cout << "##############################################" << std::endl;
         printTowers();
-        std::cout << "Schritte: " << Steps << std::endl;
+        std::cout << "Steps: " << Steps << std::endl;
 
 
         system("pause");
