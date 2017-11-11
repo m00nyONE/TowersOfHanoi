@@ -1,5 +1,12 @@
 // TowersOfHanoi by m00ny
 
+#ifdef _WIN32
+#define CLEAR "cls"
+#else //In any other OS
+#define CLEAR "clear"
+#endif
+
+
 #include <iostream>
 #include <stdio.h>
 #include <tchar.h>
@@ -35,14 +42,14 @@ int main()
         std::cout << "Steps: " << Steps << std::endl;
 
 
-        system("pause");
+        getchar();
         return 0;
 }
 
 
 void printTowers()
 {
-        system("cls");
+        system(CLEAR);
 
         int tmp = 0;
 
@@ -82,7 +89,7 @@ void setTower(int hight,int from,int to,int with)
                 if (showsteps)
                 {
                         printTowers();
-                        system("pause");
+                        getchar();
                 }
                 setTower(hight - 1, with, to, from);
 
